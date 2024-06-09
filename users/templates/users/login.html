@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen font-sans">
+    <div class="max-w-sm mx-auto px-6">
+        <div class="relative flex flex-wrap">
+            <div class="w-full relative">
+                <div class="mt-6">
+                    <div class="text-center font-semibold text-black">
+                        Login
+                    </div>
+
+                    <form action="{% url 'users:login' %}" class="form-with-validation" method="post" class="mt-8">
+                        <div class="mx-auto max-w-lg">
+                            {% csrf_token %}
+                            {{ form }}
+                            {% if request.GET.next %}
+                                <input type="hidden" name="text" value="{{ request.GET.next }}" />
+                            {% endif %}
+                            <span class="block text-xs text-gray-500 font-bold	"><a href="{% url 'users:register' %}">Don't have
+                                    account?</a></span>
+                            <button class="form-submit text-lg font-semibold 
+                  bg-gray-800 w-full text-white rounded-lg
+                  px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

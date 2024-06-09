@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen font-sans">
+    <div class="max-w-sm mx-auto px-6">
+        <div class="relative flex flex-wrap">
+            <div class="w-full relative">
+                <div class="mt-6">
+                    <div class="text-center font-semibold text-black">
+                        Register
+                    </div>
+
+                    <form action="{% url 'users:register' %}" class="form-with-validation mt-8" method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button type="submit" class="form-submit mt-3 text-lg font-semibold 
+                  bg-gray-800 w-full text-white rounded-lg
+                  px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
+                            Register now
+                        </button>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+<img src="{{ post.image.url }}" alt="{{ post.title }}" class="rounded-lg mb-4 w-2/4 mx-auto" />
+
+<h1 class="text-4xl font-bold mb-4">{{ post.title }}</h1>
+<p class="text-lg mb-4">{{ post.content }}</p>
+<p class="text-gray-500">Created at: {{ post.created_at }}</p>
+<p>Author: {{ post.author }}</p>
+{% endblock %}

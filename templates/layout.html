@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        Django App
+        {% endblock %}
+    </title>
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/main.js' %}"></script> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+    <!-- <nav> -->
+    <!-- <a href="/">🏠</a> | -->
+    <!-- <a href="/about">😁</a> | -->
+    <!-- <a href="/posts">🗒️</a> | -->
+    <!-- </nav> -->
+    <nav x-data="{ isOpen: false }" class="relative bg-white shadow dark:bg-gray-800">
+        <div class="container px-6 py-3 mx-auto md:flex">
+            
+
+            <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
+            <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
+                class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 md:mt-0 md:p-0 md:top-0 md:relative md:opacity-100 md:translate-x-0 md:flex md:items-center md:justify-between">
+                <div class="flex flex-col px-2 -mx-4 md:flex-row md:mx-10 md:py-0">
+                    <a href="/"
+                        class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2">Home</a>
+                    <!-- <a href="#"
+                        class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2">About</a> -->
+                    <a href="{% url 'posts:list' %}"
+                        class="px-2.5 py-2 text-gray-700 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 md:mx-2">Posts</a>
+                </div>
+
+                <!-- Wrapper right side -->
+                <div class="flex gap-4">
+
+                    <!-- Search -->
+                    <div class="relative mt-4 md:mt-0">
+                        
+                        </button>
+                    </div>
+
+                    
+                    {% if user.is_authenticated %}
+                    <form class="logout" action="{% url 'users:logout' %}" method="post">
+                        {% csrf_token %} 
+                        <button class="logout-button flex items-center px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80" aria-label="User Logout" title="User Logout">Logout 👋</button>
+                    </form>
+
+                    {% else %}
+                        <!-- Loggin button  -->
+                        <button
+                            class="flex items-center px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                            
+
+                            <a href="{% url 'users:login' %}" class="mx-1">Login</a>
+                        </button>
+                    {% endif %}
+                </div>
+
+
+
+            </div>
+        </div>
+    </nav>
+    <main class="container mx-auto py-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+</html>
